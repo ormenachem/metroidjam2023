@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class statManager : MonoBehaviour
@@ -11,6 +12,4 @@ public class statManager : MonoBehaviour
     public static bool hasGliding;
     public static bool hasDoubleJumping;
     public static bool hasFireBreathing;
-
-    
 }
