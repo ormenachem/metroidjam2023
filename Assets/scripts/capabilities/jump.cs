@@ -20,6 +20,8 @@ public class jump : MonoBehaviour
 
     private bool desiredJump;
     private bool onGround;
+
+    private statManager pStats;
     // Start is called before the first frame update
     void Awake()
     {
@@ -32,6 +34,11 @@ public class jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (statManager.hasDoubleJumping == true)
+        {
+            maxAirJumps = 1;
+        }
+
         desiredJump |= input.retrieveJumpInput();
         if(Input.GetButtonUp("Jump") && !onGround){
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Min(0, rb.velocity.y));
