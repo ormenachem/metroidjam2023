@@ -8,7 +8,7 @@ public class move : MonoBehaviour
 {
     [SerializeField]private inputController input = null;
     [SerializeField, Range(0f, 100f)] private float maxSpeed = 4f;
-    [SerializeField, Range(0f, 100f)] private float maxAcceleration = 35f;
+    [SerializeField, Range(0f, 600f)] private float maxAcceleration = 35f;
     [SerializeField, Range(0f, 600)] private float maxAirAcceleration = 20;
 
     private Vector2 direction;

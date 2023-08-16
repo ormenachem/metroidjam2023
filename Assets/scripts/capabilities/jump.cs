@@ -6,10 +6,10 @@ using UnityEngine;
 public class jump : MonoBehaviour
 {
     [SerializeField] private inputController input = null;
-    [SerializeField, Range(0f, 10f)] private float jumpHeight = 3f;
+    [SerializeField] private float jumpHeight = 3f;
     [SerializeField] private int maxAirJumps = 0;
-    [SerializeField, Range(0f, 5f)] private float downwardMovementMultiplier = 3f;
-    [SerializeField, Range(0f, 5f)] private float upwardMovementMultiplier = 3f;
+    [SerializeField] private float downwardMovementMultiplier = 3f;
+    [SerializeField] private float upwardMovementMultiplier = 3f;
 
     private Rigidbody2D rb;
     private groundCheck groundCheck;
@@ -33,7 +33,9 @@ public class jump : MonoBehaviour
     void Update()
     {
         desiredJump |= input.retrieveJumpInput();
-        
+        if(Input.GetButtonUp("Jump") && !onGround){
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Min(0, rb.velocity.y));
+        }
     }
     void FixedUpdate(){
         onGround = groundCheck.getOnGround();
@@ -43,7 +45,7 @@ public class jump : MonoBehaviour
             jumpPhase = 0;
         }
         if(desiredJump){
-            desiredJump = false;
+            Invoke("disableDesiredJump", 0f/**Time.deltaTime*/);
             jumpAction();
         }
         if(rb.velocity.y > 0){
@@ -65,5 +67,8 @@ public class jump : MonoBehaviour
             }
             velocity.y +=jumpSpeed;
         }
+    }
+    void disableDesiredJump(){
+        desiredJump = false;
     }
 }
