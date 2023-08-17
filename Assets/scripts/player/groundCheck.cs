@@ -5,29 +5,30 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 public class groundCheck : MonoBehaviour
-{
-    private bool onGround;
-    private float friction = 0;
-
-    [SerializeField] private float groundCheckHeight;
-    [SerializeField] private Vector2 groundCheckSize; 
-
-    void OnCollisionStay2D(Collision2D collision){
-        RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y+groundCheckHeight), groundCheckSize,0, Vector2.zero);
-        onGround = (hit.transform != null);
-    }
-    void OnCollisionExit2D(Collision2D collision){
-        onGround = false;
-    }
-
+{ 
+    bool onGround;
+    [SerializeField] LayerMask groundLayer;
     public float getFriction(){
-        return friction;
+        return 0;
     }
     public bool getOnGround(){
         return onGround;
     }
-    void OnDrawGizmos(){
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(new Vector2(transform.position.x, transform.position.y+groundCheckHeight), groundCheckSize);
+    void OnTriggerStay2D(Collider2D collision){
+        //if is triggered by an object on the ground layer set onGround to true
+        
+        onGround = true;
+        
+    }
+    void OnTriggerExit2D(Collider2D collision){
+        /*
+        when an object stops triggering this object, the onGround will be set to false
+        
+        no need to check for the layer here because if the player is still on the ground when this happens
+        it will be fixed with the onTriggerStay2D method
+        
+        */
+        onGround = false;
     }
 }
+

@@ -26,7 +26,7 @@ public class jump : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        groundCheck = GetComponent<groundCheck>();
+        groundCheck = GetComponentInChildren<groundCheck>();
 
         defultGravityScale = rb.gravityScale;
     }

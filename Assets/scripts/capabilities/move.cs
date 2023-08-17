@@ -25,7 +25,7 @@ public class move : MonoBehaviour
 
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
-        groundCheck = GetComponent<groundCheck>();
+        groundCheck = GetComponentInChildren<groundCheck>();
     }
 
     void Update(){
