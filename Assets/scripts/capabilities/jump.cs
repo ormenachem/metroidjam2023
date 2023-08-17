@@ -34,10 +34,7 @@ public class jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (statManager.hasDoubleJumping == true)
-        {
-            maxAirJumps = 1;
-        }
+        
 
         desiredJump |= input.retrieveJumpInput();
         if(Input.GetButtonUp("Jump") && !onGround){

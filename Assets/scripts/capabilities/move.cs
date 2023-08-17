@@ -48,7 +48,7 @@ public class move : MonoBehaviour
         }
 
         direction.x = input.retrieveMoveInput();
-        desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - groundCheck.getfriction(), 0f);
+        desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - groundCheck.getFriction(), 0f);
     }
     private void FixedUpdate(){
         onGround = groundCheck.getOnGround();

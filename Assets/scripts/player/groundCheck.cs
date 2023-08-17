@@ -1,42 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class groundCheck : MonoBehaviour
 {
     private bool onGround;
-    private float friction;
+    private float friction = 0;
 
-    // Start is called before the first frame update
-    private void OnCollisionEnter2D(Collision2D collision){
-        evaluateCollision(collision);
-        RetrieveFriction(collision);
+    [SerializeField] private float groundCheckHeight;
+    [SerializeField] private Vector2 groundCheckSize; 
+
+    void OnCollisionStay2D(Collision2D collision){
+        RaycastHit2D hit = Physics2D.BoxCast(new Vector2(transform.position.x, transform.position.y+groundCheckHeight), groundCheckSize,0, Vector2.zero);
+        onGround = (hit.transform != null);
     }
-    private void OnCollisionStay2D(Collision2D collision){
-        evaluateCollision(collision);
-        RetrieveFriction(collision);
-    }
-    private void OnCollisionExit2D(Collision2D collision){
+    void OnCollisionExit2D(Collision2D collision){
         onGround = false;
-        friction = 0;
     }
-    private void evaluateCollision(Collision2D collision){
-        for(int i = 0; i <collision.contactCount; i++){
-            Vector2 normal = collision.GetContact(i).normal;
-            onGround |= normal.y >= 0.9f;
-        }
-    }
-    private void RetrieveFriction(Collision2D collision){
-        PhysicsMaterial2D material = collision.rigidbody.sharedMaterial;
-        friction = 0;
-        if(material != null){
-            friction = material.friction;
-        }
+
+    public float getFriction(){
+        return friction;
     }
     public bool getOnGround(){
         return onGround;
     }
-    public float getfriction(){
-        return friction;
+    void OnDrawGizmos(){
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(new Vector2(transform.position.x, transform.position.y+groundCheckHeight), groundCheckSize);
     }
 }

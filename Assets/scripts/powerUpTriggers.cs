@@ -6,15 +6,13 @@ using UnityEngine;
 
 public class powerUpTriggers : MonoBehaviour
 {
-    // Colliders for the triggers
-    public Collider2D dJColl;
-
-    private static statManager pStats;
     
 
-    static void OnTriggerEnter2D(Collider2D dJColl) 
+    void OnTriggerEnter2D(Collider2D collision) 
     {
-        Debug.Log("You triggered something!");
-        statManager.hasDoubleJumping = true;
+        if(collision.CompareTag("Player")){
+            Debug.Log("You triggered something!");
+        }
+        
     }
 }
