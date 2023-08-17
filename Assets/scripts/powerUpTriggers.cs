@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class powerUpTriggers : MonoBehaviour
 {
-    
+    private statManager pStats;
 
     void OnTriggerEnter2D(Collider2D collision) 
     {

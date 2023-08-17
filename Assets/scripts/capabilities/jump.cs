@@ -34,8 +34,6 @@ public class jump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         desiredJump |= input.retrieveJumpInput();
         if(Input.GetButtonUp("Jump") && !onGround){
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Min(0, rb.velocity.y));
