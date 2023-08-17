@@ -7,7 +7,7 @@ public class jump : MonoBehaviour
 {
     [SerializeField] private inputController input = null;
     [SerializeField] private float jumpHeight = 3f;
-    [SerializeField] private int maxAirJumps = 0;
+    [SerializeField] public int maxAirJumps = 0;
     [SerializeField] private float downwardMovementMultiplier = 3f;
     [SerializeField] private float upwardMovementMultiplier = 3f;
 

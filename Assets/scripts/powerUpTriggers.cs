@@ -8,10 +8,15 @@ public class powerUpTriggers : MonoBehaviour
 {
     private statManager pStats;
 
+    void Start()
+    {
+        pStats = GameObject.Find("gameManager").GetComponent<statManager>();
+    }
+
     void OnTriggerEnter2D(Collider2D collision) 
     {
         if(collision.CompareTag("Player")){
-            Debug.Log("You triggered something!");
+            pStats.hasDoubleJumping = true;
         }
         
     }
