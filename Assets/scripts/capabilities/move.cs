@@ -21,6 +21,7 @@ public class move : MonoBehaviour
     private float acceleration;
     private bool onGround;
     private bool hasLanded;
+    private bool isFacingRight;
 
     void Awake(){
         rb = GetComponent<Rigidbody2D>();
@@ -28,6 +29,13 @@ public class move : MonoBehaviour
     }
 
     void Update(){
+        isFacing();
+
+        if (isFacingRight == true && input.retrieveMoveInput() < 0f && input.retrieveMoveInput() > -1f) 
+        {
+            transform.Rotate(0f, -180f, 0f);
+        }
+
         if (onGround && hasLanded == false) {
             hasLanded = true;
             rb.drag = 5f;
@@ -51,6 +59,7 @@ public class move : MonoBehaviour
         desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - groundCheck.getFriction(), 0f);
     }
     private void FixedUpdate(){
+
         onGround = groundCheck.getOnGround();
 
         velocity = rb.velocity;
@@ -60,5 +69,27 @@ public class move : MonoBehaviour
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
         rb.velocity = velocity;
 
+    }
+
+// A function for checking which way the player is looking at
+    private void isFacing()
+    {
+        // If the player is walking the opposite way of which he is facing then he is considered !facingRight
+        if (input.retrieveMoveInput() < 1f && input.retrieveMoveInput() > 0f)
+        {
+            isFacingRight = true;
+        }
+
+        else
+        {
+            isFacingRight = false;
+        }
+    }
+
+// A function for rotating the player
+
+    private void rotatePlayer()
+    {
+        
     }
 }
