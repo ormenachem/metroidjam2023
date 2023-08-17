@@ -21,7 +21,7 @@ public class jump : MonoBehaviour
     private bool desiredJump;
     private bool onGround;
 
-    private statManager pStats;
+    
     // Start is called before the first frame update
     void Awake()
     {

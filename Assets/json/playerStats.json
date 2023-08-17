@@ -1,0 +1,9 @@
+{
+        "playersStats":[
+            {
+                "health":15,
+                "hasDoubleJump":false
+
+            }
+        ]
+}
