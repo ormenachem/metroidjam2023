@@ -90,6 +90,9 @@ public class move : MonoBehaviour
 
     private void rotatePlayer()
     {
-        
+        if (isFacingRight == true)
+        {
+            transform.Rotate(0f, -180f, 0f);
+        }
     }
 }
