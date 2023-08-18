@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 
 public class groundCheck : MonoBehaviour
 { 
-    bool onGround;
+    public bool onGround;
     [SerializeField] LayerMask groundLayer;
     public float getFriction(){
         return 0;
