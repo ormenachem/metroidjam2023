@@ -1,5 +1,5 @@
 {
-    "currentHealth":10,
-    "maxHealth":10,
-    "hasDoubleJump": true
+    "currentHealth": 6.0,
+    "maxHealth": 2.0,
+    "hasWallJump": false
 }
