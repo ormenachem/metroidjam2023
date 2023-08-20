@@ -1,9 +1,5 @@
 {
-        "playersStats":[
-            {
-                "health":15,
-                "hasDoubleJump":false
-
-            }
-        ]
+    "currentHealth":10,
+    "maxHealth":10,
+    "hasDoubleJump": true
 }

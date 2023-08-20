@@ -24,7 +24,7 @@ public class move : MonoBehaviour
     private bool isFacingRight;
 
     void Awake(){
-        isFacingRight = true;
+        
         rb = GetComponent<Rigidbody2D>();
         groundCheck = GetComponentInChildren<groundCheck>();
     }
@@ -53,9 +53,7 @@ public class move : MonoBehaviour
         desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - groundCheck.getFriction(), 0f);
     }
     private void FixedUpdate(){
-        isFacing();
         rotatePlayer();
-
         onGround = groundCheck.getOnGround();
 
         velocity = rb.velocity;
@@ -66,35 +64,15 @@ public class move : MonoBehaviour
         rb.velocity = velocity;
 
     }
-
-// A function for checking which way the player is looking at
-    private void isFacing()
-    {
-        // Check for horizontal and then if the player is trying to walk to a direction he will be rotated to that direction
-        if (input.retrieveMoveInput() < 0f && input.retrieveMoveInput() > -1f)
-        {
-            isFacingRight = false;
+    void rotatePlayer(){
+        if(velocity.x <0){
+            transform.localScale = new Vector3(-1, transform.localScale.y, transform.localScale.z);
         }
-
-        else if (input.retrieveMoveInput() > 0f && input.retrieveMoveInput() < 1f)
-        {
-            isFacingRight = true;
+        if(velocity.x >0){
+            transform.localScale = new Vector3(1, transform.localScale.y, transform.localScale.z);
         }
     }
 
-// A function for rotating the player
 
-    private void rotatePlayer()
-    {
-        // If the player is facing one way and moving the other rotate the player to always look the way he's going
-        if (isFacingRight == false && input.retrieveMoveInput() > 0f && input.retrieveMoveInput() < 1f)
-        {
-            transform.localScale = new Vector2(transform.localScale.x * -1f, transform.localScale.y);
-        }
 
-        if (isFacingRight == true && input.retrieveMoveInput() < 0f && input.retrieveMoveInput() < -1f)
-        {
-            transform.localScale = new Vector2(transform.localScale.x * -1f, transform.localScale.y);
-        }
-    }
 }
