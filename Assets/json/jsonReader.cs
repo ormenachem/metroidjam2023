@@ -9,7 +9,13 @@ using UnityEngine.Rendering;
 public class jsonReader : MonoBehaviour
 {
     [SerializeField]private TextAsset statsJSON;
+
+    public static PlayerStats playerStats;
     
+    void Awake(){
+        playerStats = new PlayerStats();
+        playerStats = playerStats.getFromJSON(statsJSON);
+    }
     [System.Serializable]
     public class PlayerStats{
         public float currentHealth;

@@ -7381,10 +7381,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsJSON: {fileID: 4900000, guid: 37a11539d81d32d44a9f98742558f4e6, type: 3}
-  playerStats:
-    currentHealth: 0
-    maxHealth: 0
-    hasWallJump: 0
 --- !u!1 &1850541213
 GameObject:
   m_ObjectHideFlags: 0
@@ -7666,6 +7662,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35b29846edd43e449e02e5863b2db05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasWallJump: 0
+  wallCheckHeight: 0
+  wallCheckLength: 0.59
+  facingLeftOffset: -0.01
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  rb: {fileID: 5424954066742878425}
 --- !u!212 &8662708861615662326
 SpriteRenderer:
   m_ObjectHideFlags: 0
