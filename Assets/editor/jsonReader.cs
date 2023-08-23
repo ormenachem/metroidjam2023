@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using System.IO;
-using UnityEditor;
-using UnityEditor.UI;
 using UnityEngine;
-using UnityEngine.Rendering;
+
 
 public class jsonReader : MonoBehaviour
 {
-    [SerializeField]private TextAsset statsJSON;
+    public TextAsset statsJSON;
 
-    public static PlayerStats playerStats;
+    public PlayerStats playerStats;
     
     void Awake(){
         playerStats = new PlayerStats();
@@ -20,15 +19,25 @@ public class jsonReader : MonoBehaviour
     public class PlayerStats{
         public float currentHealth;
         public float maxHealth;
-        public bool hasWallJump;
+        public bool hasWallClimb;
+        public bool hasDoubleJump;
+        public bool hasGliding;
+        public bool hasFireBreathing;
+        public bool hasGroundPound;
 
         public PlayerStats getFromJSON(TextAsset jsonFile){
             return JsonUtility.FromJson<PlayerStats>(jsonFile.text);
         }
+        // public void updateJSON(TextAsset jsonFile){
+        //     string jsonForm = JsonUtility.ToJson(this, true);
+        //     File.WriteAllText(AssetDatabase.GetAssetPath(jsonFile), jsonForm);  
+        // }
         public void updateJSON(TextAsset jsonFile){
             string jsonForm = JsonUtility.ToJson(this, true);
-            File.WriteAllText(AssetDatabase.GetAssetPath(jsonFile), jsonForm);  
+            string path = Path.Combine(Application.persistentDataPath, jsonFile.name + ".json");
+            File.WriteAllText(path, jsonForm);  
         }
+
     }
 
 }

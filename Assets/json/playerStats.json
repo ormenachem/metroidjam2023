@@ -1,5 +1,9 @@
 {
-    "currentHealth": 6.0,
-    "maxHealth": 2.0,
-    "hasWallJump": false
+    "currentHealth": 0.0,
+    "maxHealth": 0.0,
+    "hasWallClimb": true,
+    "hasDoubleJump": false,
+    "hasGliding": false,
+    "hasFireBreathing": true,
+    "hasGroundPound": false
 }
