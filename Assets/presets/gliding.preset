@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: gliding
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: 49cadc8071ba05546bd393f84615b676, type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: input
+    value: 
+    objectReference: {fileID: 11400000, guid: 91e9f5d380422ca41be5c891a606f897, type: 2}
+  - target: {fileID: 0}
+    propertyPath: groundCheck
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: glidingForwardSpeed
+    value: 1520
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: glidingDownwardsSpeed
+    value: -9
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: rb
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: isGliding
+    value: 0
+    objectReference: {fileID: 0}
+  m_ExcludedProperties: []

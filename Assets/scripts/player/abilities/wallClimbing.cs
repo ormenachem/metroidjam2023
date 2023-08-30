@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class wallClimbing : MonoBehaviour
 {
-    [SerializeField]private bool hasWallJump;
+
     [SerializeField]private float wallCheckHeight;
     [SerializeField]private float wallCheckLength;
     [SerializeField]private float facingLeftOffset;
@@ -12,30 +12,31 @@ public class wallClimbing : MonoBehaviour
     [SerializeField]private Rigidbody2D rb;
     [SerializeField]private float onWallDrag;
     [SerializeField]private float wallClimbSpeed;
-    [SerializeField]jsonReader jsonReader;
     [SerializeField]private inputController input;
     private bool isFacingRight = true;
     private bool onWall;
     private float defultDrag;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        defultDrag = rb.drag;
-        jsonReader = GameObject.FindGameObjectWithTag("gameManager").GetComponent<jsonReader>();
         rb = GetComponent<Rigidbody2D>();
+        defultDrag = rb.drag;
+        
     }
 
         void Update(){
-        hasWallJump = jsonReader.playerStats.getFromJSON(jsonReader.statsJSON).hasWallClimb;
-        if (transform.localScale.x >0)isFacingRight = true;
-        if (transform.localScale.x <0)isFacingRight = false;
-        if(onWall && rb.velocity.y<0 && hasWallJump){
-            rb.drag = onWallDrag;
-            if(input.retrieveJumpInput()){
-                rb.AddForce(Vector2.up * Time.fixedDeltaTime*wallClimbSpeed, ForceMode2D.Impulse);
-            }
-        }else rb.drag = defultDrag;
+            
+            
+            if (transform.localScale.x >0)isFacingRight = true;
+            if (transform.localScale.x <0)isFacingRight = false;
+            if(onWall && rb.velocity.y<0){
+                rb.drag = onWallDrag;
+                if(input.retrieveJumpInput()){
+                    rb.AddForce(Vector2.up * Time.fixedDeltaTime*wallClimbSpeed, ForceMode2D.Impulse);
+                }
+            }else rb.drag = defultDrag;
+            
     }
     void OnCollisionStay2D(Collision2D collision){
         onWall = wallCheck();

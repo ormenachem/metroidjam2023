@@ -7,6 +7,7 @@ public class move : MonoBehaviour
 {
     [SerializeField]private inputController input = null;
     [SerializeField, Range(0f, 100f)] private float maxSpeed = 4f;
+    [SerializeField, Range(0f, 100f)] private float maxAirSpeed = 4f;
     [SerializeField, Range(0f, 600f)] private float maxAcceleration = 35f;
     [SerializeField, Range(0f, 600)] private float maxAirAcceleration = 20;
 
@@ -29,24 +30,7 @@ public class move : MonoBehaviour
     }
 
     void Update(){
-        if (onGround && hasLanded == false) {
-            hasLanded = true;
-            rb.drag = 5f;
-            rb.velocity = new Vector2(Mathf.Lerp(rb.velocity.x, 0, 0.3f), rb.velocity.y);
-        }
-
-        if (!onGround && hasLanded == true) {
-            hasLanded = false;
-        }
-
-        while (onGround)
-        {
-            if (input.retrieveMoveInput() == 0f && rb.velocity.x != 0) 
-            {
-                rb.velocity = Vector2.MoveTowards(rb.velocity, new Vector2(0, rb.velocity.y), 0.15f);
-            }
-            break;
-        }
+        
 
         direction.x = input.retrieveMoveInput();
         desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - groundCheck.getFriction(), 0f);
@@ -60,6 +44,14 @@ public class move : MonoBehaviour
         acceleration = onGround? maxAcceleration:maxAirAcceleration;
         maxSpeedChange = acceleration * Time.deltaTime;
         velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
+        if(!onGround){
+            if(GetComponent<gliding>() != null){
+                if(!GetComponent<gliding>().isGliding)
+                velocity.x = Mathf.Clamp(velocity.x, -maxAirSpeed, maxAirSpeed);
+            }else{
+                velocity.x = Mathf.Clamp(velocity.x, -maxAirSpeed, maxAirSpeed);
+            }
+        }
         rb.velocity = velocity;
 
     }

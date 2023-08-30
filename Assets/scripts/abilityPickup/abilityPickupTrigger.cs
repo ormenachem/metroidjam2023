@@ -1,49 +1,50 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using UnityEditor.Presets;
 using UnityEngine;
 
 public class abilityPickupTrigger : MonoBehaviour
 {
-    [SerializeField] private Abilities abilityToTrigger;
-    [SerializeField] private jsonReader jsonReader;
+    [SerializeField]private Ability abilityToTrigger;
+    
+    [SerializeField]private Preset wallClimbPreset;
+    [SerializeField]private Preset doubleJumpPreset;
+    [SerializeField]private Preset fireBreathingPreset;
+    [SerializeField]private Preset glidingPreset;
+    [SerializeField]private Preset groundPoundPreset;
 
-    enum Abilities{
-        doubleJump, wallClimbing, fireBreathing, groundPound, gliding 
+    [SerializeField]private GameObject player;
+    enum Ability{
+        groundPound, wallClimbing, fireBreathing, gliding, doubleJumping, key
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        jsonReader = GameObject.FindGameObjectWithTag("gameManager").GetComponent<jsonReader>();
+    void Awake(){
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void OnTriggerEnter2D(Collider2D collider){
-        if(collider.CompareTag("Player")){
-            jsonReader.PlayerStats newPlayerStatsObject = new jsonReader.PlayerStats();
-            
-            switch(abilityToTrigger)
-            {
-                case Abilities.doubleJump:
-                    newPlayerStatsObject = newPlayerStatsObject.getFromJSON(jsonReader.statsJSON);
-                    newPlayerStatsObject.hasDoubleJump = true;
+    void OnTriggerEnter2D(Collider2D colilsion){
+        if(colilsion.CompareTag("Player")){
+            switch(abilityToTrigger){
+                case Ability.doubleJumping:
                     break;
-                case Abilities.wallClimbing:
-                    newPlayerStatsObject = newPlayerStatsObject.getFromJSON(jsonReader.statsJSON);
-                    newPlayerStatsObject.hasWallClimb = true;
+                case Ability.fireBreathing:
                     break;
-                case Abilities.fireBreathing:
-                    newPlayerStatsObject = newPlayerStatsObject.getFromJSON(jsonReader.statsJSON);
-                    newPlayerStatsObject.hasFireBreathing = true;
+                case Ability.gliding:
+                    if(player.GetComponent<gliding>() == null){
+                        glidingPreset.ApplyTo(player.AddComponent<gliding>());
+                    }
                     break;
-                case Abilities.groundPound:
-                    newPlayerStatsObject = newPlayerStatsObject.getFromJSON(jsonReader.statsJSON);
-                    newPlayerStatsObject.hasGroundPound = true;
+                case Ability.groundPound:
                     break;
-                case Abilities.gliding:
-                    newPlayerStatsObject = newPlayerStatsObject.getFromJSON(jsonReader.statsJSON);
-                    newPlayerStatsObject.hasGliding = true;
+                case Ability.wallClimbing:
+                    if(player.GetComponent<wallClimbing>() == null){
+                        wallClimbPreset.ApplyTo(player.AddComponent<wallClimbing>());
+                    }
+                    break;
+                case Ability.key:
                     break;
             }
-            newPlayerStatsObject.updateJSON(jsonReader.statsJSON);
         }
     }
 }
