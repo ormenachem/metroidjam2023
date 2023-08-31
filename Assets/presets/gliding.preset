@@ -34,11 +34,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: glidingForwardSpeed
-    value: 1520
+    value: 1120
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: glidingDownwardsSpeed
-    value: -9
+    value: -1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: rb

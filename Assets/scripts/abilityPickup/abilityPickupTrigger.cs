@@ -9,11 +9,7 @@ public class abilityPickupTrigger : MonoBehaviour
 {
     [SerializeField]private Ability abilityToTrigger;
     
-    [SerializeField]private Preset wallClimbPreset;
-    [SerializeField]private Preset doubleJumpPreset;
-    [SerializeField]private Preset fireBreathingPreset;
-    [SerializeField]private Preset glidingPreset;
-    [SerializeField]private Preset groundPoundPreset;
+    
 
     [SerializeField]private GameObject player;
     enum Ability{
@@ -31,20 +27,17 @@ public class abilityPickupTrigger : MonoBehaviour
                 case Ability.fireBreathing:
                     break;
                 case Ability.gliding:
-                    if(player.GetComponent<gliding>() == null){
-                        glidingPreset.ApplyTo(player.AddComponent<gliding>());
-                    }
+                    gameStats.hasGliding = true;
                     break;
                 case Ability.groundPound:
                     break;
                 case Ability.wallClimbing:
-                    if(player.GetComponent<wallClimbing>() == null){
-                        wallClimbPreset.ApplyTo(player.AddComponent<wallClimbing>());
-                    }
+                    gameStats.hasWallClimbing = true;
                     break;
                 case Ability.key:
                     break;
             }
+            GameObject.FindWithTag("gameManager").GetComponent<gameStats>().checkAbilities();
         }
     }
 }

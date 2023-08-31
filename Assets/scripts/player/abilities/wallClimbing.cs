@@ -35,7 +35,7 @@ public class wallClimbing : MonoBehaviour
                 if(input.retrieveJumpInput()){
                     rb.AddForce(Vector2.up * Time.fixedDeltaTime*wallClimbSpeed, ForceMode2D.Impulse);
                 }
-            }else rb.drag = defultDrag;
+            }else GetComponent<Rigidbody2D>().drag = defultDrag;
             
     }
     void OnCollisionStay2D(Collision2D collision){
