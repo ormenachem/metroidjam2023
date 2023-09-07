@@ -16,6 +16,7 @@ public class move : MonoBehaviour
     private Vector2 velocity;
     private Rigidbody2D rb;
     private groundCheck groundCheck;
+    private Animator animator;
 
     private float maxSpeedChange;
     private float acceleration;
@@ -24,14 +25,15 @@ public class move : MonoBehaviour
     private bool isFacingRight;
 
     void Awake(){
-        
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         groundCheck = GetComponentInChildren<groundCheck>();
     }
 
     void Update(){
-        
 
+        animator.SetFloat("speed", Mathf.Abs(rb.velocity.x));
+        animator.SetBool("isJumping", !groundCheck.getOnGround());
         direction.x = input.retrieveMoveInput();
         desiredVelocity = new Vector2(direction.x, 0f) * Mathf.Max(maxSpeed - groundCheck.getFriction(), 0f);
     }

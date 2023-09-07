@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(Rigidbody2D))]
 public class wallClimbing : MonoBehaviour
+
 {
 
     [SerializeField]private float wallCheckHeight;
     [SerializeField]private float wallCheckLength;
     [SerializeField]private float facingLeftOffset;
     [SerializeField]private LayerMask wallLayer;
-    [SerializeField]private Rigidbody2D rb;
+    private Rigidbody2D rb;
+    private Animator animator;
     [SerializeField]private float onWallDrag;
     [SerializeField]private float wallClimbSpeed;
     [SerializeField]private inputController input;
@@ -21,12 +23,14 @@ public class wallClimbing : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         defultDrag = rb.drag;
         
     }
 
         void Update(){
             
+            animator.SetBool("isWallClimbing", onWall);
             
             if (transform.localScale.x >0)isFacingRight = true;
             if (transform.localScale.x <0)isFacingRight = false;
@@ -40,6 +44,9 @@ public class wallClimbing : MonoBehaviour
     }
     void OnCollisionStay2D(Collision2D collision){
         onWall = wallCheck();
+    }
+    void OnCollisionExit2D(Collision2D collision) {
+        onWall = false;
     }
     bool wallCheck(){
         if(isFacingRight){

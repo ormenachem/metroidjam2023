@@ -5,12 +5,11 @@ using UnityEngine;
 public class gliding : MonoBehaviour
 {
     [SerializeField] inputController input;
-    [SerializeField] groundCheck groundCheck;
+    groundCheck groundCheck;
 
-    
     [SerializeField] private float glidingForwardSpeed;
     [SerializeField] private float glidingDownwardsSpeed;
-    [SerializeField] private Rigidbody2D rb;
+    private Rigidbody2D rb;
     [SerializeField] public bool isGliding;
     private bool isFacingRight = true;
     private float defultGravityScale;

@@ -19,8 +19,8 @@ public class abilityPickupTrigger : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void OnTriggerEnter2D(Collider2D colilsion){
-        if(colilsion.CompareTag("Player")){
+    void OnTriggerEnter2D(Collider2D collision){
+        if(collision.gameObject.tag == "Player"){
             switch(abilityToTrigger){
                 case Ability.doubleJumping:
                     break;

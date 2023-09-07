@@ -30,7 +30,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: wallCheckLength
-    value: 0.59
+    value: 0.89
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: facingLeftOffset
@@ -39,10 +39,6 @@ Preset:
   - target: {fileID: 0}
     propertyPath: wallLayer.m_Bits
     value: 8
-    objectReference: {fileID: 0}
-  - target: {fileID: 0}
-    propertyPath: rb
-    value: 
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: onWallDrag
